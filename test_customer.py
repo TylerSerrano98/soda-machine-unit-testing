@@ -1,4 +1,5 @@
 import unittest
+from cans import Cola, OrangeSoda, RootBeer
 from customer import Customer
 from coins import Quarter, Nickel, Dime
 
@@ -58,6 +59,36 @@ class TestAddCoinsToWallet(unittest.TestCase):
         list_of_coins = []
         self.customer.add_coins_to_wallet(list_of_coins)
         self.assertEqual(88, len(self.customer.wallet.money))
+
+
+class TestAddCanToBackpack(unittest.TestCase):
+
+    def setUp(self):
+        self.customer = Customer()
+
+    def test_customer_backpack_length(self):
+        """Test to see if customers backpack purchased_cans list goes up by 1"""
+        my_cola = Cola()
+
+        list_of_cans = [my_cola]
+        self.customer.add_can_to_backpack(list_of_cans)
+        self.assertEqual(1, len(self.customer.backpack.purchased_cans))
+
+    def test_orangesoda_in_backpack(self):
+        """Test to see if customers backpack purchased_cans list goes up by 1"""
+        my_orangesoda = OrangeSoda()
+
+        list_of_cans = [my_orangesoda]
+        self.customer.add_can_to_backpack(list_of_cans)
+        self.assertEqual(1, len(self.customer.backpack.purchased_cans))
+
+    def test_rootbeer_in_backpack(self):
+        """Test to see if customers backpack purchased_cans list goes up by 1"""
+        my_rootbeer = RootBeer()
+
+        list_of_cans = [my_rootbeer]
+        self.customer.add_can_to_backpack(list_of_cans)
+        self.assertEqual(1, len(self.customer.backpack.purchased_cans))
 
 
 if __name__ == '__main__':
