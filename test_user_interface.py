@@ -1,5 +1,6 @@
 import unittest
-from user_interface import try_parse_int, validate_main_menu
+from user_interface import try_parse_int, validate_main_menu, get_unique_can_names
+from cans import Can
 
 
 class TestValidateMainMenu(unittest.TestCase):
@@ -47,6 +48,39 @@ class TestTryParseInt(unittest.TestCase):
         """test to see if an invalid string number returns a 0"""
         random_string = try_parse_int("hello")
         self.assertEqual(random_string, 0)
+
+class TestGetUniqueCanNames(unittest.TestCase):
+    """test loop through inventory to create list of all distinct types of soda"""
+
+    def test_returned_can_names(self):
+        """test to confirm only 3 can names"""
+        cola1 = Can("Cola", .7)
+        cola2 = Can("Cola", .6)
+        orange_soda1 = Can("Orange Soda", .5)
+        orange_soda2 = Can("Orange Soda", .4)
+        root_beer1 = Can("Root Beer", .3)
+        root_beer2 = Can("Root Beer", .2)
+        list_of_soda = []
+
+        list_of_soda.append(cola1)
+        list_of_soda.append(cola2)
+        list_of_soda.append(orange_soda1)
+        list_of_soda.append(orange_soda2)
+        list_of_soda.append(root_beer1)
+        list_of_soda.append(root_beer2)
+
+        total_can_names = get_unique_can_names(list_of_soda)
+        self.assertEqual(len(total_can_names), 3)
+
+    def test_pass_empty_list(self):
+        """test to confirm passing an empty list returns 0"""
+        list_of_soda = []
+
+        total_can_names = get_unique_can_names(list_of_soda)
+        self.assertEqual(len(total_can_names), 0)
+    
+
+        
 
 
 if __name__ == '__main__':
