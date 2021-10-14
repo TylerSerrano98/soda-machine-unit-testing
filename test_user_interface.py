@@ -1,6 +1,7 @@
 import unittest
-from user_interface import try_parse_int, validate_main_menu, get_unique_can_names
+from user_interface import display_payment_value, try_parse_int, validate_main_menu, get_unique_can_names
 from cans import Can
+from coins import Quarter, Nickel, Dime, Penny
 
 
 class TestValidateMainMenu(unittest.TestCase):
@@ -78,7 +79,33 @@ class TestGetUniqueCanNames(unittest.TestCase):
 
         total_can_names = get_unique_can_names(list_of_soda)
         self.assertEqual(len(total_can_names), 0)
-    
+
+class TestDisplayPaymentValue(unittest.TestCase):
+    """test to see if coins selected by customer is displayed correctly"""
+
+    def test_coin_type_value(self):
+        """test to see if coin types return value of .41"""
+
+        my_quarter = Quarter()
+        my_nickel = Nickel()
+        my_dime = Dime()
+        my_penny = Penny()
+
+        list_of_coins = []
+        list_of_coins.append(my_quarter)
+        list_of_coins.append(my_penny)
+        list_of_coins.append(my_dime)
+        list_of_coins.append(my_nickel)
+
+        total_value = display_payment_value(list_of_coins)
+        self.assertEqual(total_value, .41)
+
+    def test_empty_list_value(self):
+        """test to see if empty coin list returns 0"""
+        list_of_coins = []
+        
+        total_value = display_payment_value(list_of_coins)
+        self.assertEqual(total_value, 0)
 
         
 
