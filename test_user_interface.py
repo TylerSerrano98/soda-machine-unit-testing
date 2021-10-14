@@ -1,5 +1,5 @@
 import unittest
-from user_interface import display_payment_value, try_parse_int, validate_main_menu, get_unique_can_names
+from user_interface import display_payment_value, try_parse_int, validate_coin_selection, validate_main_menu, get_unique_can_names
 from cans import Can
 from coins import Quarter, Nickel, Dime, Penny
 
@@ -37,6 +37,7 @@ class TestValidateMainMenu(unittest.TestCase):
         user_types_invalid = validate_main_menu(5)
         self.assertEqual(user_types_invalid, (False, None))
 
+
 class TestTryParseInt(unittest.TestCase):
     """tests to see if string is parse into an integer"""
 
@@ -49,6 +50,7 @@ class TestTryParseInt(unittest.TestCase):
         """test to see if an invalid string number returns a 0"""
         random_string = try_parse_int("hello")
         self.assertEqual(random_string, 0)
+
 
 class TestGetUniqueCanNames(unittest.TestCase):
     """test loop through inventory to create list of all distinct types of soda"""
@@ -80,6 +82,7 @@ class TestGetUniqueCanNames(unittest.TestCase):
         total_can_names = get_unique_can_names(list_of_soda)
         self.assertEqual(len(total_can_names), 0)
 
+
 class TestDisplayPaymentValue(unittest.TestCase):
     """test to see if coins selected by customer is displayed correctly"""
 
@@ -103,11 +106,49 @@ class TestDisplayPaymentValue(unittest.TestCase):
     def test_empty_list_value(self):
         """test to see if empty coin list returns 0"""
         list_of_coins = []
-        
+
         total_value = display_payment_value(list_of_coins)
         self.assertEqual(total_value, 0)
 
-        
+
+class TestValidateCoinSelection(unittest.TestCase):
+    """Test to validate user coin selection for payment"""
+
+    def test_quarter_validation(self):
+        """Test to validate quarter when user inputs '1' """
+
+        user_selects_one = validate_coin_selection(1)
+        self.assertEqual(user_selects_one, (True, "Quarter"))
+
+    def test_dime_validation(self):
+        """Test to validate dime when user inputs '2' """
+
+        user_selects_two = validate_coin_selection(2)
+        self.assertEqual(user_selects_two, (True, "Dime"))
+
+    def test_nickel_validation(self):
+        """Test to validate nickel when user inputs '3' """
+
+        user_selects_three = validate_coin_selection(3)
+        self.assertEqual(user_selects_three, (True, "Nickel"))
+
+    def test_penny_validation(self):
+        """Test to validate penny when user inputs '4' """
+
+        user_selects_four = validate_coin_selection(4)
+        self.assertEqual(user_selects_four, (True, "Penny"))
+
+    def test_done_validation(self):
+        """Test to validate done when user inputs '5' """
+
+        user_selects_five = validate_coin_selection(5)
+        self.assertEqual(user_selects_five, (True, "Done"))
+
+    def test_different_number(self):
+        """Test to ensure (False, None) is returned when user inputs different number """
+
+        user_inputs_different = validate_coin_selection(7)
+        self.assertEqual(user_inputs_different, (False, None))
 
 
 if __name__ == '__main__':
