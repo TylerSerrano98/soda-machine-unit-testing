@@ -1,5 +1,5 @@
 import unittest
-from user_interface import validate_main_menu
+from user_interface import try_parse_int, validate_main_menu
 
 
 class TestValidateMainMenu(unittest.TestCase):
@@ -34,6 +34,19 @@ class TestValidateMainMenu(unittest.TestCase):
 
         user_types_invalid = validate_main_menu(5)
         self.assertEqual(user_types_invalid, (False, None))
+
+class TestTryParseInt(unittest.TestCase):
+    """tests to see if string is parse into an integer"""
+
+    def test_int_value_returned(self):
+        """test to see if a string number returns an int"""
+        random_number = try_parse_int(10)
+        self.assertEqual(random_number, 10)
+
+    def test_invalid_string(self):
+        """test to see if an invalid string number returns a 0"""
+        random_string = try_parse_int("hello")
+        self.assertEqual(random_string, 0)
 
 
 if __name__ == '__main__':
