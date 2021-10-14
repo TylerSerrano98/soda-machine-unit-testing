@@ -124,7 +124,7 @@ class TestDetermineChangeValue(unittest.TestCase):
         self.assertEqual(amount_left, .1)
 
     def test_equal_values(self):
-        """Test tp determine if two values are equal"""
+        """Test to determine if two values are equal"""
 
         my_soda = .5
         my_payment = .5
@@ -132,6 +132,32 @@ class TestDetermineChangeValue(unittest.TestCase):
         no_change = self.soda_machine.determine_change_value(
             my_soda, my_payment)
         self.assertEqual(no_change, 0)
+
+class TestCalculateCoinValue(unittest.TestCase):
+    """test to determine calculated coin value"""
+    def setUp(self):
+        self.soda_machine = SodaMachine()
+
+    def test_coin_value_return(self):
+        """Test to see if coin types appended to list equal a value of .41"""
+        my_quarter = Quarter()
+        my_nickel = Nickel()
+        my_dime = Dime()
+        my_penny = Penny()
+
+        list_of_coins = []
+        list_of_coins.append(my_quarter)
+        list_of_coins.append(my_penny)
+        list_of_coins.append(my_dime)
+        list_of_coins.append(my_nickel)
+        total_value = self.soda_machine.calculate_coin_value(list_of_coins)
+        self.assertEqual(total_value, .41)
+
+    def test_coin_value_zero(self):
+        """Test to see if empty list returns a value of 0"""
+        list_of_coins = []
+        total_value = self.soda_machine.calculate_coin_value(list_of_coins)
+        self.assertEqual(total_value, 0)
 
 
 if __name__ == '__main__':
