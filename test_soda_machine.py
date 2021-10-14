@@ -2,8 +2,10 @@ import unittest
 from coins import Dime, Nickel, Penny, Quarter
 from soda_machine import SodaMachine
 
+
 class TestFillRegister(unittest.TestCase):
     """test for soda machines fill_register method"""
+
     def setUp(self):
         self.soda_machine = SodaMachine()
 
@@ -11,8 +13,10 @@ class TestFillRegister(unittest.TestCase):
         """test to see if register length is 88"""
         self.assertEqual(88, len(self.soda_machine.register))
 
+
 class TestFillInventory(unittest.TestCase):
     """test for soda machines fill_inventory method"""
+
     def setUp(self):
         self.soda_machine = SodaMachine()
 
@@ -21,8 +25,10 @@ class TestFillInventory(unittest.TestCase):
         my_inventory = SodaMachine()
         self.assertEqual(30, len(self.soda_machine.inventory))
 
+
 class TestGetCoinFromRegister(unittest.TestCase):
     """test for soda machines get_coin_from_register method"""
+
     def setUp(self):
         self.soda_machine = SodaMachine()
 
@@ -51,13 +57,43 @@ class TestGetCoinFromRegister(unittest.TestCase):
         returned_coin = self.soda_machine.get_coin_from_register('banana')
         self.assertEqual(returned_coin, None)
 
-    
+
 class TestRegisterHasCoin(unittest.TestCase):
     """test to see if register has each type of coin"""
+
     def setUp(self):
-        pass
-        
-    
+        self.soda_machine = SodaMachine()
+
+    def test_quarter_return_true(self):
+        """Test to see if quarter will return True if the register has one"""
+
+        returned_coin = self.soda_machine.register_has_coin('Quarter')
+        self.assertTrue(returned_coin, Quarter)
+
+    def test_dime_return_true(self):
+        """Test to see if dime will return True if the register has one"""
+
+        returned_coin = self.soda_machine.register_has_coin('Dime')
+        self.assertTrue(returned_coin, Dime)
+
+    def test_nickel_return_true(self):
+        """Test to see if nickel will return True if the register has one"""
+
+        returned_coin = self.soda_machine.register_has_coin('Nickel')
+        self.assertTrue(returned_coin, Nickel)
+
+    def test_penny_return_true(self):
+        """Test to see if penny will return True if the register has one"""
+
+        returned_coin = self.soda_machine.register_has_coin('Penny')
+        self.assertTrue(returned_coin, Penny)
+
+    def test_invalid_return_false(self):
+        """Test to see if invalid coin will return False"""
+
+        returned_coin = self.soda_machine.register_has_coin('Banana')
+        self.assertFalse(returned_coin)
+
 
 if __name__ == '__main__':
     unittest.main()
