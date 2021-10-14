@@ -203,5 +203,29 @@ class TestReturnInventory(unittest.TestCase):
         self.assertEqual(len(self.soda_machine.inventory), 31)
 
 
+class TestDepositCoinsIntoRegister(unittest.TestCase):
+    """test to determine if coins are being passed into the register"""
+
+    def setUp(self):
+        self.soda_machine = SodaMachine()
+
+    def test_length_of_register(self):
+        """This test determines if passed in coins will be added to the register list"""
+        my_quarter = Quarter()
+        my_nickel = Nickel()
+        my_dime = Dime()
+        my_penny = Penny()
+
+        list_of_coins = []
+        list_of_coins.append(my_quarter)
+        list_of_coins.append(my_penny)
+        list_of_coins.append(my_dime)
+        list_of_coins.append(my_nickel)
+
+        self.soda_machine.deposit_coins_into_register(
+            list_of_coins)
+        self.assertEqual(len(self.soda_machine.register), 92)
+
+
 if __name__ == '__main__':
     unittest.main()
