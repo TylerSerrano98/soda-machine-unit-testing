@@ -133,8 +133,10 @@ class TestDetermineChangeValue(unittest.TestCase):
             my_soda, my_payment)
         self.assertEqual(no_change, 0)
 
+
 class TestCalculateCoinValue(unittest.TestCase):
     """test to determine calculated coin value"""
+
     def setUp(self):
         self.soda_machine = SodaMachine()
 
@@ -159,8 +161,10 @@ class TestCalculateCoinValue(unittest.TestCase):
         total_value = self.soda_machine.calculate_coin_value(list_of_coins)
         self.assertEqual(total_value, 0)
 
+
 class TestGetInventorySoda(unittest.TestCase):
     """test to determine the inventory of soda"""
+
     def setUp(self):
         self.soda_machine = SodaMachine()
 
@@ -184,6 +188,19 @@ class TestGetInventorySoda(unittest.TestCase):
         my_soda = self.soda_machine.get_inventory_soda("Mountain Dew")
         self.assertEqual(my_soda, None)
 
+
+class TestReturnInventory(unittest.TestCase):
+    """test to determine if can is returned to inventory"""
+
+    def setUp(self):
+        self.soda_machine = SodaMachine()
+
+    def test_return_can_list_length(self):
+        """Test to see if length of self.inventory is 31 after returned can"""
+
+        returned_can = Cola()
+        self.soda_machine.return_inventory(returned_can)
+        self.assertEqual(len(self.soda_machine.inventory), 31)
 
 
 if __name__ == '__main__':
