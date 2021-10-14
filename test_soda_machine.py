@@ -159,6 +159,32 @@ class TestCalculateCoinValue(unittest.TestCase):
         total_value = self.soda_machine.calculate_coin_value(list_of_coins)
         self.assertEqual(total_value, 0)
 
+class TestGetInventorySoda(unittest.TestCase):
+    """test to determine the inventory of soda"""
+    def setUp(self):
+        self.soda_machine = SodaMachine()
+
+    def test_cola_name(self):
+        """test to determine if cola returns cola"""
+        my_cola = self.soda_machine.get_inventory_soda("Cola")
+        self.assertIsInstance(my_cola, Cola)
+
+    def test_orange_name(self):
+        """test to determine if Orange soda returns Orange soda"""
+        my_orange = self.soda_machine.get_inventory_soda("Orange Soda")
+        self.assertIsInstance(my_orange, OrangeSoda)
+
+    def test_root_beer_name(self):
+        """test to determine if Root beer returns Root beer"""
+        my_root_beer = self.soda_machine.get_inventory_soda("Root Beer")
+        self.assertIsInstance(my_root_beer, RootBeer)
+
+    def test_invalid_name(self):
+        """test to determine if Invalid soda returns None"""
+        my_soda = self.soda_machine.get_inventory_soda("Mountain Dew")
+        self.assertEqual(my_soda, None)
+
+
 
 if __name__ == '__main__':
     unittest.main()
